@@ -3,7 +3,7 @@ services:
     name: whatsapp-aesthetic-bot
     env: python
     plan: free
-    buildCommand: true
+    buildCommand: pip install -r requirements.txt
     startCommand: python bot.py
     envVars:
       - key: PORT
