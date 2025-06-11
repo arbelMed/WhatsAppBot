@@ -3,7 +3,7 @@ services:
     name: whatsapp-aesthetic-bot
     env: python
     plan: free
-    buildCommand: "echo \"No build step needed\""
+    buildCommand: true
     startCommand: python bot.py
     envVars:
       - key: PORT
