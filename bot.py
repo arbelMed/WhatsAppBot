@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from twilio.twiml.messaging_response import MessagingResponse
+import os
 
 app = Flask(__name__)
 
@@ -10,10 +11,12 @@ def whatsapp_bot():
     response = MessagingResponse()
     msg = response.message()
 
+    # Handle image
     if media_url:
         msg.body("📷 תודה על התמונה! נבדוק אותה וניתן לך המלצה בקרוב 💬")
         return str(response)
 
+    # Handle text responses
     if 'שפתיים' in incoming_msg or '1' == incoming_msg:
         msg.body("👄 נראה שטיפול פיסול שפתיים יכול להתאים לך. רוצה פרטים נוספים?")
     elif 'אף' in incoming_msg or '2' == incoming_msg:
@@ -32,4 +35,5 @@ def whatsapp_bot():
     return str(response)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
